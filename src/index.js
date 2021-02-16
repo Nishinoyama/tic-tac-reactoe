@@ -103,7 +103,7 @@ class Game extends React.Component {
                 `Go to game Start` :
                 `Go to move #${move} ${move % 2 ? 'X' : 'O'}(${step.lastHand % 3},${Math.floor(step.lastHand / 3)})`;
             return (
-                <li key={move}>
+                <li key={move} className={this.state.stepNumber === move ? "history-current-step" : "history-other-step"}>
                     <button onClick={() => this.jumpTo(move)}>
                         {desc}
                     </button>

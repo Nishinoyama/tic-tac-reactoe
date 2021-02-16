@@ -63,3 +63,7 @@ ol, ul {
 .game-info {
   margin-left: 20px;
 }
+
+.history-current-step {
+  font-weight: bold;
+}
