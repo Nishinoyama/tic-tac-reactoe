@@ -62,8 +62,9 @@ class Game extends React.Component {
         this.state = {
             history: [{
                 squares: Array(9).fill(null),
-                lastHand: null
+                lastHand: null,
             }],
+            historyInc: true,
             stepNumber: 0,
             xIsNext: true,
         };
@@ -79,8 +80,8 @@ class Game extends React.Component {
         squares[i] = this.state.xIsNext ? 'X' : 'O';
         this.setState({
             history: history.concat([{
-                squares: squares,
-                lastHand: i
+                squares,
+                lastHand: i,
             }]),
             stepNumber: history.length,
             xIsNext: !this.state.xIsNext,
@@ -91,6 +92,13 @@ class Game extends React.Component {
         this.setState({
             stepNumber: step,
             xIsNext: (step % 2) === 0,
+        });
+    }
+
+    historyOrderSwap() {
+        const historyInc = !this.state.historyInc;
+        this.setState({
+            historyInc
         })
     }
 
@@ -115,8 +123,8 @@ class Game extends React.Component {
                         {desc}
                     </button>
                 </li>
-            )
-        })
+            );
+        });
 
         return (
             <div className="game">
@@ -129,11 +137,28 @@ class Game extends React.Component {
                 <div>
                     <div className="game-info">
                         <div>{status}</div>
-                        <ol>{moves}</ol>
+                        <div className="game-history">
+                            <label >
+                                HistoryOrder:
+                                <button
+                                    value="history-order"
+                                    onClick={() => this.historyOrderSwap()}
+                                    className={`history-button-${this.state.historyInc ? 'increase' : 'decrease'}`}
+                                >
+                                    {this.state.historyInc ? 'INC' : 'DEC' }
+                                </button>
+                            </label>
+                        </div>
+                        <div>
+                            Histories:
+                            <ol>
+                                {this.state.historyInc ? moves : moves.reverse()}
+                            </ol>
+                        </div>
                     </div>
                 </div>
             </div>
-        )
+        );
     }
 }
 
@@ -161,7 +186,7 @@ ReactDOM.render(
   // <React.StrictMode>
   <Game />,
   // </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById('root'),
 );
 
 // If you want to start measuring performance in your app, pass a function

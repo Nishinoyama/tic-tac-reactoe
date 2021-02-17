@@ -67,3 +67,29 @@ ol, ul {
 .history-current-step {
   font-weight: bold;
 }
+
+.game-history {
+  margin-top: 10px;
+}
+
+.history-button-decrease {
+  background: #f39b9b;
+  text-align: center;
+  width: 51px;
+  border: 0;
+}
+
+.history-button-increase {
+  background: #61dafb;
+  text-align: center;
+  width: 51px;
+  border: 0;
+}
+
+.history-button-decrease:focus {
+  outline: none;
+}
+
+.history-button-increase:focus {
+  outline: none;
+}
