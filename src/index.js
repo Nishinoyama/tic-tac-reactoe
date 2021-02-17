@@ -17,9 +17,30 @@ class Square extends React.Component {
 }
 
 class Board extends React.Component {
+
+    renderBoard() {
+        return Array(3).fill(null).map((_,row) =>
+            (
+                <div
+                    key={row}
+                    className="board-row"
+                >
+                    {this.renderRow(row)}
+                </div>
+            )
+        );
+    }
+
+    renderRow(row) {
+        return Array(3).fill(null).map((_,col) =>
+            this.renderSquare(row*3 + col)
+        );
+    }
+
     renderSquare(i) {
         return (
             <Square
+                key={i}
                 value={this.props.squares[i]}
                 onClick={() => this.props.onClick(i)}
             />
@@ -29,21 +50,7 @@ class Board extends React.Component {
     render() {
         return (
             <div>
-                <div className="board-row">
-                    {this.renderSquare(0)}
-                    {this.renderSquare(1)}
-                    {this.renderSquare(2)}
-                </div>
-                <div className="board-row">
-                    {this.renderSquare(3)}
-                    {this.renderSquare(4)}
-                    {this.renderSquare(5)}
-                </div>
-                <div className="board-row">
-                    {this.renderSquare(6)}
-                    {this.renderSquare(7)}
-                    {this.renderSquare(8)}
-                </div>
+                {this.renderBoard()}
             </div>
         );
     }
@@ -99,7 +106,7 @@ class Game extends React.Component {
         }
 
         const moves = history.map((step, move) => {
-            const desc = move === 0 ?
+            const desc = step.lastHand === null ?
                 `Go to game Start` :
                 `Go to move #${move} ${move % 2 ? 'X' : 'O'}(${step.lastHand % 3},${Math.floor(step.lastHand / 3)})`;
             return (
