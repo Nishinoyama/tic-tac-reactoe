@@ -108,7 +108,11 @@ class Game extends React.Component {
         let highlights = [];
         let status;
         if (winning === null) {
-            status = `Player: ${this.state.xIsNext ? 'X' : 'O'}`;
+            if ( this.state.stepNumber === 9 ) {
+                status = `Draw`;
+            } else {
+                status = `Player: ${this.state.xIsNext ? 'X' : 'O'}`;
+            }
         } else {
             status = `Winner: ${winning.winner}`;
             highlights = winning.highlightedSquares;
