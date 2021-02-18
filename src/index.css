@@ -51,6 +51,10 @@ ol, ul {
   outline: none;
 }
 
+.square-highlighted {
+  background: #fff5d4;
+}
+
 .kbd-navigation .square:focus {
   background: #ddd;
 }
